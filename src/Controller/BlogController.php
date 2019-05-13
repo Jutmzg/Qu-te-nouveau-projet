@@ -10,15 +10,22 @@ namespace App\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
 
-
-
+/**
+ * @Route("/blog", name="blog_")
+ */
 class BlogController extends AbstractController
 {
-    public function index()
+    /**
+     * @Route("/show/{slug}",
+     *     requirements={"slug"="[a-z0-9-]*"},
+     *     defaults={"slug"="Article Sans Titre"},
+     *     name="show")
+     */
+    public function show($slug)
     {
-        return $this->render('blog/index.html.twig', [
-            'owner' => 'Thomas'
-        ]);
+        return $this->render('blog/show.html.twig', ['slug' =>
+            ucwords(str_replace('-', ' ', $slug))]);
     }
 }
