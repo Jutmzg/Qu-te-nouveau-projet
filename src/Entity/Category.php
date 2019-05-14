@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
