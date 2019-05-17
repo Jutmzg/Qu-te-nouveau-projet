@@ -77,11 +77,14 @@ class BlogController extends AbstractController
             );
         }
 
+        $category = $article->getCategory();
+
         return $this->render(
             'blog/show.html.twig',
             [
                 'article' => $article,
-                'slug' => $slug
+                'slug' => $slug,
+                'category' => $category,
             ]
         );
     }
@@ -108,20 +111,21 @@ class BlogController extends AbstractController
             );
         }
 
-
-        $article = $this->getDoctrine()
+        /*$article = $this->getDoctrine()
             ->getRepository(Article::class)
             ->findBy(
                 ['category' => $category],
                 ['id' => 'DESC'],
                 3
-            );
+            );*/
+
+        $articles = $category->getArticles();
 
         return $this->render(
             'blog/category.html.twig',
             [
-                'category' => $categoryName,
-                'article' => $article
+                'category' => $category->getName(),
+                'articles' => $articles
             ]
         );
     }

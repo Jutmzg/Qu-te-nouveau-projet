@@ -2,9 +2,9 @@
 
 {% block body %}
 
-    {% for article in article %}
+    {% for article in articles %}
         <div>
-            <h2>{{ loop.index }} / {{ article.title }} - Category : {{ article.category.name }}</h2>
+            <h2>{{ loop.index }} / {{ article.title }} - Category : {{ category }}</h2>
             <p>{{ article.content }}</p>
         </div>
     {% else %}
