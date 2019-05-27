@@ -77,6 +77,10 @@ class BlogController extends AbstractController
             );
         }
 
+        return $this->render('blog/show.html.twig', [
+            'slug' => $slug,
+            'article' => $article,
+        ]);
     }
 
         /**
