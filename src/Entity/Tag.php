@@ -25,6 +25,7 @@ class Tag
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Article", inversedBy="tags")
+     * @ORM\JoinTable(name="tag_article")
      */
     private $articles;
 
