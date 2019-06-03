@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tags{% endblock %}
+
+{% block body %}
+    Liste des tags :
+    <br>
+    {% for tag in tags %}
+        {{ tag.name }}
+    {% endfor %}
+
+{% endblock %}
