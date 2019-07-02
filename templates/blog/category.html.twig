@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    {% for article in articles %}
-        <div>
-            <h2>{{ loop.index }} / {{ article.title }} - Category : {{ category.name }}</h2>
-            <p>{{ article.content }}</p>
-        </div>
-    {% else %}
-        Aucun article trouvé.
-    {% endfor %}
-    <a href="{{ path('app_index') }}">
-        Back to homepage.
-    </a>
-
+    <div class="container">
+        {% for article in articles %}
+            <div>
+                <h2>{{ loop.index }} / {{ article.title }} - Category : {{ category.name }}</h2>
+                <p>{{ article.content }}</p>
+            </div>
+        {% else %}
+            Aucun article trouvé.
+        {% endfor %}
+        <a href="{{ path('app_index') }}">
+            Back to homepage.
+        </a>
+    </div>
 {% endblock %}
