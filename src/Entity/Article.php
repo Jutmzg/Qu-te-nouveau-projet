@@ -6,9 +6,12 @@ use App\Service\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
+ * @UniqueEntity("title")
  */
 class Article
 {
@@ -20,12 +23,20 @@ class Article
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=150, nullable=true)
+     * @ORM\Column(type="string", nullable=true, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(max=255)
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank()
+     * @Assert\Regex(
+     *     pattern="/digital/i",
+     *     match=false,
+     *     message="En français, il faut dire numérique !"
+     * )
      */
     private $content;
 
