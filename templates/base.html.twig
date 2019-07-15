@@ -10,8 +10,16 @@
 <body>
 {{ include('_navbar.html.twig') }}
 {{ include('_menu.html.twig') }}
+{{ app.session.get('total') }}
 <div class="container">
-    {% block body %}<h1>Bienvenue sur mon blog</h1>{% endblock %}
+    {% for category, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% block body %}{% endblock %}
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}

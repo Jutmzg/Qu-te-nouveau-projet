@@ -43,6 +43,8 @@ class ArticleController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Le nouvel article a été créé');
+
             $message = (new \Swift_Message('Un nouvel article vient d\'être publié !'))
                 ->setFrom('drembot.dev@gmail.com')
                 ->setTo('jul.bousseau@gmail.com')
@@ -111,6 +113,8 @@ class ArticleController extends AbstractController
             $entityManager->remove($article);
             $entityManager->flush();
         }
+
+        $this->addFlash('error', 'L\'article a bien été supprimé');
 
         return $this->redirectToRoute('article_index');
     }

@@ -12,6 +12,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -25,8 +26,12 @@ class BlogController extends AbstractController
      * @Route("/", name="index")
      * @return Response A response instance
      */
-    public function index(): Response
+    public function index(SessionInterface $session): Response
     {
+        if (!$session->has('total')) {
+            $session->set('total', 0);
+        }
+
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
             ->findAll();
@@ -54,7 +59,7 @@ class BlogController extends AbstractController
      *     name="show")
      * @return Response A response instance
      */
-    public function show(string $slug):Response
+    public function show(string $slug): Response
     {
         if (!$slug) {
             throw $this
@@ -83,16 +88,16 @@ class BlogController extends AbstractController
         ]);
     }
 
-        /**
-         * Getting a article with a formatted slug for title
-         *
-         * @param object $category
-         *
-         * @Route("/category/{id}",
-         *     name="show_category_name")
-         * @return Response A response instance
-         */
-        public function showByCategory(Category $category):Response
+    /**
+     * Getting a article with a formatted slug for title
+     *
+     * @param object $category
+     *
+     * @Route("/category/{id}",
+     *     name="show_category_name")
+     * @return Response A response instance
+     */
+    public function showByCategory(Category $category): Response
     {
 
         /*$article = $this->getDoctrine()
