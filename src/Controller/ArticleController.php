@@ -22,7 +22,7 @@ class ArticleController extends AbstractController
     public function index(ArticleRepository $articleRepository): Response
     {
         return $this->render('article/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
+            'articles' => $articleRepository->findAllWithCategories(),
         ]);
     }
 
@@ -78,7 +78,7 @@ class ArticleController extends AbstractController
      */
     public function edit(Request $request, Article $article, Slugify $slugify): Response
     {
-        if($article->getAuthor() !== $this->getUser()->getRoles()){
+        if(!$this->isGranted('ROLE_ADMIN') && $article->getAuthor() !== $this->getUser()){
             throw $this->createAccessDeniedException();
         }
 

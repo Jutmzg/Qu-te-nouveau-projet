@@ -36,15 +36,16 @@ class ArticleRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Article
+    public function findAllWithCategories()
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $qb = $this->createQueryBuilder('a')
+            ->innerJoin('a.category', 'c' )
+            ->innerJoin('a.tags', 't')
+            ->addSelect('c')
+            ->addSelect('t')
+            ->orderBy('t.id')
+            ->getQuery();
+
+        return $qb->execute();
     }
-    */
 }
