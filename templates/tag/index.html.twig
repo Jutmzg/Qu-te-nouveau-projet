@@ -8,5 +8,5 @@
     {% for tag in tags %}
         {{ tag.name }}
     {% endfor %}
-
+    {{ include('tag/_delete_form.html.twig') }}
 {% endblock %}

@@ -45,8 +45,8 @@ class TagController extends AbstractController
             $entityManager->flush();
         }
 
-        $this->addFlash('error', 'La catégorie a bien été supprimée');
+        $this->addFlash('danger', 'Le tag a bien été supprimé');
 
-        return $this->redirectToRoute('article_index');
+        return $this->redirectToRoute('tag_index');
     }
 }

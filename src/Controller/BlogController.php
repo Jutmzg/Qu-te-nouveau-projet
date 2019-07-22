@@ -32,6 +32,8 @@ class BlogController extends AbstractController
             $session->set('total', 0);
         }
 
+        $total = $session->get('total');
+
         $articles = $this->getDoctrine()
             ->getRepository(Article::class)
             ->findAll();

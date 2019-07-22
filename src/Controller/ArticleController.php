@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use App\Service\Slugify;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -77,6 +78,7 @@ class ArticleController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
+     * @ParamConverter("Article")
      */
     public function edit(Request $request, Article $article, Slugify $slugify): Response
     {
@@ -114,7 +116,7 @@ class ArticleController extends AbstractController
             $entityManager->flush();
         }
 
-        $this->addFlash('error', 'L\'article a bien été supprimé');
+        $this->addFlash('danger', 'L\'article a bien été supprimé');
 
         return $this->redirectToRoute('article_index');
     }

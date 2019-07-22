@@ -10,7 +10,6 @@
 <body>
 {{ include('_navbar.html.twig') }}
 {{ include('_menu.html.twig') }}
-{{ app.session.get('total') }}
 <div class="container">
     {% for category, messages in app.flashes %}
         {% for message in messages %}
